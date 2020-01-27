@@ -10,5 +10,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Demo to use Secret env vars
+      run: |
+        echo ${secretworddemo}
+        echo ${keyworddemo}
+      env:
+        keyworddemo: macnicademo
+        secretworddemo: ${{ secrets.Name }}
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+    - name: Login to Docker Hub
+      run: docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
+      env:
+        USER: ${{ secret.user }}
+        TOKEN: ${{ secrets.token }}  
+    - name: Publish Image
+      run: docker push my-image-name:$(date +%s)
