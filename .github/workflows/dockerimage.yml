@@ -9,7 +9,7 @@ jobs:
     env:
       keyworddemo: "macnicademo"
       secretworddemo: ${{ secrets.Name }}
-      tag: `$(date +%s)`
+      tag: "1.0"
       image: "myimage"
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
