@@ -38,9 +38,9 @@ jobs:
       run: |
         ./twistcli images scan --details --address ${TL_URL} -u ${TL_USER} -p ${TL_PASS} --vulnerability-threshold ${TL_VULN} ${TL_FIX} --compliance-threshold ${TL_COMP} "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
 
-    #- name: Login to GH Packages
-    #  run: |
-    #    docker login docker.pkg.github.com -u ${GH_USER} -p ${GH_PASS}
+    - name: Login to GH Packages
+      run: |
+        docker login docker.pkg.github.com -u ${GH_USER} -p ${GH_PASS}
 
-    #- name: Publish Image
-    #  run: docker push "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
+    - name: Publish Image
+      run: docker push "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
