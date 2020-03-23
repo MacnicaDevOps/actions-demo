@@ -21,7 +21,7 @@ jobs:
         echo ${secretworddemo}
         echo ${keyworddemo}
         echo ${tag}
-        echo: ${image}
+        echo ${image}
 
     - name: Build the Docker image
       run: |
