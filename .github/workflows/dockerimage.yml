@@ -7,12 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TAG: "0.1"
+      TAG: "0.2"
       IMAGE: "test-image"
       TL_VULN: "high"
       TL_COMP: "high"
       TL_FIX: "--only-fixed"
-      TL_URL: "https://asia-northeast1.cloud.twistlock.com/anz-3051008"
+      TL_URL: ${{ secrets.tl_url }}
       GH_USER: ${{ secrets.gh_user }}
       GH_PASS: ${{ secrets.gh_pass }}  
       TL_USER: ${{ secrets.tl_user }}
