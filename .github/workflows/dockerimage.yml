@@ -10,7 +10,8 @@ jobs:
     env:
       keyworddemo: "macnicademo"
       secretworddemo: ${{ secrets.Name }}
-      image: "my-image:"$(date +%s)
+      tag: $(date +%s)
+      image: myimage
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
 steps:
@@ -22,11 +23,11 @@ steps:
 
     - name: Build the Docker image
       run: |
-        docker build --tag ${image} .
+        docker build --tag ${image}:${tag} .
       
     - name: Login to Docker Hub
       run: |
         docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
       
     - name: Publish Image
-      run: docker push ${image}
+      run: docker push ${image}:${tag}
