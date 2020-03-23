@@ -9,8 +9,8 @@ jobs:
     env:
       keyworddemo: "macnicademo"
       secretworddemo: ${{ secrets.Name }}
-      tag: "1.0"
-      image: "myimage"
+      tag: ${GITHUB_RUN_ID}
+      image: ${GITHUB_WORKFLOW}
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
 
@@ -21,6 +21,7 @@ jobs:
         echo ${secretworddemo}
         echo ${keyworddemo}
         echo ${tag}
+        echo: ${image}
 
     - name: Build the Docker image
       run: |
