@@ -15,7 +15,7 @@ jobs:
       TOKEN: ${{ secrets.token }}  
 
   steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Demo to use Secret env vars
       run: |
         echo ${secretworddemo}
