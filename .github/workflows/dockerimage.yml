@@ -9,8 +9,8 @@ jobs:
     env:
       keyworddemo: "macnicademo"
       secretworddemo: ${{ secrets.Name }}
-      tag: ${GITHUB_RUN_ID}
-      image: ${GITHUB_WORKFLOW}
+      tag: ${{ GITHUB_RUN_ID }}
+      image: ${{ GITHUB_WORKFLOW }}
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
 
@@ -31,5 +31,5 @@ jobs:
       run: |
         docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
       
-    - name: Publish Image
-      run: docker push ${image}:${tag}
+    #- name: Publish Image
+    #  run: docker push ${image}:${tag}
