@@ -27,7 +27,7 @@ jobs:
       run: |
         docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
       env:
-        USER: ${{ secret.user }}
+        USER: ${{ secrets.user }}
         TOKEN: ${{ secrets.token }}  
     - name: Publish Image
       run: docker push my-image-name:${tag}
