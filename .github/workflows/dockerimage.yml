@@ -7,27 +7,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    steps:
+    env:
+      keyworddemo: "macnicademo"
+      secretworddemo: ${{ secrets.Name }}
+      image: "my-image:"$(date +%s)
+      USER: ${{ secrets.user }}
+      TOKEN: ${{ secrets.token }}  
+steps:
     - uses: actions/checkout@v1
     - name: Demo to use Secret env vars
       run: |
         echo ${secretworddemo}
         echo ${keyworddemo}
-      env:
-        keyworddemo: macnicademo
-        secretworddemo: ${{ secrets.Name }}
-        tag: $(date +%s)
 
     - name: Build the Docker image
       run: |
-        docker build --tag my-image-name:${tag} .
+        docker build --tag ${image} .
       
     - name: Login to Docker Hub
       run: |
         docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
-      env:
-        USER: ${{ secrets.user }}
-        TOKEN: ${{ secrets.token }}  
+      
     - name: Publish Image
-      run: docker push my-image-name:${tag}
+      run: docker push ${image}
