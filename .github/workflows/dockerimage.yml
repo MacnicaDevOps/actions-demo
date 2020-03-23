@@ -7,29 +7,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      keyworddemo: "macnicademo"
-      secretworddemo: test-image
-      tag: 0.1
-      image: ${{ GITHUB_WORKFLOW }}
-      USER: ${{ secrets.user }}
-      TOKEN: ${{ secrets.token }}  
+      TAG: "0.1"
+      IMAGE: "test-image"
+      TL_VULN: "high"
+      TL_COMP: "high"
+      TL_FIX: "--only-fixed"
+      TL_URL: "https://asia-northeast1.cloud.twistlock.com/anz-3051008"
+      GH_USER: ${{ secrets.gh_user }}
+      GH_PASS: ${{ secrets.gh_pass }}  
+      TL_USER: ${{ secrets.tl_user }}
+      TL_PASS: ${{ secrets.tl_pass }}
 
     steps:
     - uses: actions/checkout@v2
     - name: Demo to use Secret env vars
       run: |
-        echo ${secretworddemo}
-        echo ${keyworddemo}
-        echo ${tag}
-        echo ${image}
+        echo ${TAG}
+        echo ${IMAGE}
 
     - name: Build the Docker image
       run: |
-        docker build --tag ${image}:${tag} .
-      
-    - name: Login to Docker Hub
+        docker build --tag "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG} .
+        
+    - name: Get twistcli (image scanner)
       run: |
-        docker login --username ${USER} --password ${TOKEN} "https://index.docker.io/v1/"
-      
+        curl -k -u $tl_u3 -p $tl_p3 --output twistcli ${TL_URL}"/anz-3051008/api/v1/util/twistcli"
+        chmod +x twistcli
+        
+    - name: Scan image
+      run: |
+        ./twistcli images scan --details --address ${TL_URL} -u ${TL_USER} -p ${TL_PASS} --vulnerability-threshold ${TL_VULN} ${TL_FIX} --compliance-threshold ${TL_COMP} "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
+
+    #- name: Login to GH Packages
+    #  run: |
+    #    docker login docker.pkg.github.com -u ${GH_USER} -p ${GH_PASS}
+
     #- name: Publish Image
-    #  run: docker push ${image}:${tag}
+    #  run: docker push "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
