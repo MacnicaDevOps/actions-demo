@@ -41,4 +41,7 @@ jobs:
     - name: Login and Publish image to GH Packages
       run: |
         docker login docker.pkg.github.com -u ${GH_USER} -p ${GH_PASS}
+        
+    - name: Publish image to GH Packages
+      run: |
         docker push "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
