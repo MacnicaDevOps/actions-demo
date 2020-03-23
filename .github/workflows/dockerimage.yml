@@ -5,16 +5,16 @@ on: [push]
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
     env:
       keyworddemo: "macnicademo"
       secretworddemo: ${{ secrets.Name }}
       tag: $(date +%s)
-      image: myimage
+      image: "myimage"
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
-steps:
+
+  steps:
     - uses: actions/checkout@v1
     - name: Demo to use Secret env vars
       run: |
