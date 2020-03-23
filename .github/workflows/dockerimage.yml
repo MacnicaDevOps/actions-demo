@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       keyworddemo: "macnicademo"
-      secretworddemo: ${{ secrets.Name }}
-      tag: ${{ GITHUB_RUN_ID }}
+      secretworddemo: test-image
+      tag: 0.1
       image: ${{ GITHUB_WORKFLOW }}
       USER: ${{ secrets.user }}
       TOKEN: ${{ secrets.token }}  
