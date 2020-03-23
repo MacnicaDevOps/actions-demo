@@ -31,7 +31,7 @@ jobs:
         
     - name: Get twistcli (image scanner)
       run: |
-        curl -k -u $tl_u3 -p $tl_p3 --output twistcli ${TL_URL}"/anz-3051008/api/v1/util/twistcli"
+        curl -k -u ${TL_USER} -p ${TL_PASS} --output twistcli ${TL_URL}"/anz-3051008/api/v1/util/twistcli"
         chmod +x twistcli
         
     - name: Scan image
