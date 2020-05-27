@@ -8,11 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TAG: "0.2"
-      IMAGE: "test-image"
-      TL_VULN: "high"
-      TL_COMP: "high"
-      TL_FIX: "--only-fixed"
-      TL_URL: ${{ secrets.tl_url }}
+      IMAGE: "test-image"}
       GH_USER: ${{ secrets.gh_user }}
       GH_PASS: ${{ secrets.gh_pass }}  
       TL_USER: ${{ secrets.tl_user }}
@@ -36,7 +32,7 @@ jobs:
         
     - name: Scan image
       run: |
-        ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci $TL_IMAGE":"$CIRCLE_BUILD_NUM | tee result.out
+        ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG} | tee result.out
             e=`cat result.out | grep -c "threshold check results: PASS"`
             if [ $e -eq 2 ]; then
               echo "Build Scan succeeded"
