@@ -36,7 +36,7 @@ jobs:
         
     - name: Scan image
       run: |
-        ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci $TL_IMAGE":"$CIRCLE_BUILD_NUM | tee result.out
+        ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG} | tee result.out
             e=`cat result.out | grep -c "threshold check results: PASS"`
             if [ $e -eq 2 ]; then
               echo "Build Scan succeeded"
