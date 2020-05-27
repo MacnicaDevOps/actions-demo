@@ -21,6 +21,7 @@ jobs:
       run: |
         echo ${TAG}
         echo ${IMAGE}
+        echo ${GITHUB_RUN_NUMBER}
 
     - name: Build the Docker image
       run: |
