@@ -43,6 +43,7 @@ jobs:
               exit 0
             else
               echo "Build failed"
+              
               exit 1
             fi
 #        ./twistcli images scan --details --address ${TL_URL} -u ${TL_USER} -p ${TL_PASS} --vulnerability-threshold ${TL_VULN} ${TL_FIX} --compliance-threshold ${TL_COMP} "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
