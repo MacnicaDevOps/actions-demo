@@ -1,3 +1,4 @@
 From nginx:1.17
-USER root
+ENV password=secret
+#USER root
 EXPOSE 80
