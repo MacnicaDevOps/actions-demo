@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TAG: "0.2"
+      TAG: "0.3"
       IMAGE: "test-image"
       TL_URL: ${{ secrets.tl_url }}
       GH_USER: ${{ secrets.gh_user }}
