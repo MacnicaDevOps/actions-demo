@@ -36,7 +36,16 @@ jobs:
         
     - name: Scan image
       run: |
-        ./twistcli images scan --details --address ${TL_URL} -u ${TL_USER} -p ${TL_PASS} --vulnerability-threshold ${TL_VULN} ${TL_FIX} --compliance-threshold ${TL_COMP} "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
+        ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci $TL_IMAGE":"$CIRCLE_BUILD_NUM | tee result.out
+            e=`cat result.out | grep -c "threshold check results: PASS"`
+            if [ $e -eq 2 ]; then
+              echo "Build Scan succeeded"
+              exit 0
+            else
+              echo "Build failed"
+              exit 1
+            fi
+#        ./twistcli images scan --details --address ${TL_URL} -u ${TL_USER} -p ${TL_PASS} --vulnerability-threshold ${TL_VULN} ${TL_FIX} --compliance-threshold ${TL_COMP} "docker.pkg.github.com/macnicadevops/actions-demo/"${IMAGE}:${TAG}
 
     - name: Login to GH Packages
       run: |
