@@ -1,4 +1,4 @@
-From nginx:1.12
+From nginx:1.25.3
 #From nginx:1.17
 ENV password=secret
 #USER macnica
